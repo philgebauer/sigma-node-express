@@ -2,10 +2,14 @@
 var express = require('express');
 var app = express();
 var path = require('path');
+var bodyParser = require('body-parser');
+
+// puts post request body data and store it on req.body
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.set('port', process.env.PORT || 3000);
 
-// data
+// Our song data
 var songs = [
   {
     artist: "Bruce Springstein",
@@ -14,6 +18,16 @@ var songs = [
 ];
 
 // Routes
+app.post('/songs', function(req, res) {
+  // req.body is supplied by bodyParser above
+  console.log("REQ body: ", req.body);
+  var newSong = req.body;
+  songs.push(newSong);
+
+  // created new resource
+  res.sendStatus(201);
+});
+
 app.get('/songs', function(req, res) {
   console.log('handling get request for songs');
   // response options

@@ -15,8 +15,14 @@ $(document).ready(function() {
     $.ajax({
       type: 'POST',
       url: '/songs',
+      data: newSong,
       success: function(response) {
         console.log(response);
+        if(response == "Created") {
+          getSongs();
+        } else {
+          alert("Oh no! Your song didn't save correctly.");
+        }
       }
     })
 
