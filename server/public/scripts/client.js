@@ -7,6 +7,9 @@ $(document).ready(function() {
 
     $.each($('#postSongForm').serializeArray(), function(i, field) {
       newSong[field.name] = field.value;
+
+
+
     });
 
     console.log(newSong);
@@ -27,6 +30,8 @@ $(document).ready(function() {
     })
 
   })
+
+
 
   getSongs();
 

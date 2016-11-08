@@ -17,15 +17,38 @@ var songs = [
   }
 ];
 
+
+function duplicate () {
+
+for (var i = 0; i < songs.length; i++) {
+  if (songs[i].artist == newSong.artist || songs[i].title == newSong.title){
+     return true;
+
+    }
+  }
+  return false;
+}
+
+
+
+
 // Routes
 app.post('/songs', function(req, res) {
   // req.body is supplied by bodyParser above
   console.log("REQ body: ", req.body);
-  var newSong = req.body;
-  songs.push(newSong);
+  newSong = req.body;
+
+  var isDuplicate = duplicate(newSong);
+  if (isDuplicate == true) {
+    res.sendStatus(400);
+  } else {
+    res.sendStatus(201);
+    songs.push(newSong);
+
+  }
 
   // created new resource
-  res.sendStatus(201);
+
 });
 
 app.get('/songs', function(req, res) {
