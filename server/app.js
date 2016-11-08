@@ -29,7 +29,13 @@ for (var i = 0; i < songs.length; i++) {
   return false;
 }
 
-
+function blankField () {
+  for (var i = 0; i < songs.length; i++) {
+    if (newSong.artist == "" || newSong.artist == "")
+      return true;
+  }
+  return false;
+}
 
 
 // Routes
@@ -38,13 +44,14 @@ app.post('/songs', function(req, res) {
   console.log("REQ body: ", req.body);
   newSong = req.body;
 
+  var isBlankField = blankField(newSong);
   var isDuplicate = duplicate(newSong);
-  if (isDuplicate == true) {
+  
+  if (isDuplicate == true || isBlankField == true) {
     res.sendStatus(400);
   } else {
     res.sendStatus(201);
     songs.push(newSong);
-
   }
 
   // created new resource
