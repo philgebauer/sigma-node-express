@@ -5,12 +5,27 @@ var path = require('path');
 
 app.set('port', process.env.PORT || 3000);
 
+// data
+var songs = [
+  {
+    artist: "Bruce Springstein",
+    title: "Born in the U.S.A."
+  }
+];
+
+// Routes
+app.get('/songs', function(req, res) {
+  console.log('handling get request for songs');
+  // response options
+  // res.sendStatus(200);
+  res.send(songs);
+});
 
 // static file routing
 app.get('/*', function(req, res) {
   var file = req.params[0] || '/views/index.html';
   console.log(file);
-  
+
   res.sendFile(path.join(__dirname, './public/', file));
   // /public/views/index.html
 });
