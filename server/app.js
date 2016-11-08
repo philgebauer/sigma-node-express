@@ -10,10 +10,15 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.set('port', process.env.PORT || 3000);
 
 // Our song data
+var today = new Date().toISOString().slice(0, 10);
+
+
+
 var songs = [
   {
     artist: "Bruce Springstein",
-    title: "Born in the U.S.A."
+    title: "Born in the U.S.A.",
+
   }
 ];
 
@@ -46,7 +51,7 @@ app.post('/songs', function(req, res) {
 
   var isBlankField = blankField(newSong);
   var isDuplicate = duplicate(newSong);
-  
+
   if (isDuplicate == true || isBlankField == true) {
     res.sendStatus(400);
   } else {

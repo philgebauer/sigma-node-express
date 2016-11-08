@@ -1,6 +1,9 @@
 $(document).ready(function() {
   console.log("it's alive!");
 
+  var today = new Date().toISOString().slice(0, 10);
+
+
   $("#postSongForm").on("submit", function(event) {
     event.preventDefault();
     var newSong = {};
@@ -53,6 +56,7 @@ $(document).ready(function() {
       var $el = $("#songContainer").children().last();
       $el.append('<h3>' + songs[i].title + '</h3>');
       $el.append('<p>By: ' + songs[i].artist + '</p>');
+      $el.append('<p>' + today + '</p>');
     }
 
   }
